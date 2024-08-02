@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "375430683927",
+    "project_id": "lilistapp",
+    "storage_bucket": "lilistapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375430683927:android:b16d681ce9d4f45684eb52",
+        "android_client_info": {
+          "package_name": "com.example.list_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLwSBoTX6z73L1LHg7om0OX_Ww8DqERpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
