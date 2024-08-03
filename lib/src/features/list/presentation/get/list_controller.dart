@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:list_app/src/features/list/domain/entities/list_entity.dart';
 import 'package:list_app/src/features/list/domain/usecases/get_list.dart';
@@ -37,6 +38,15 @@ class ListController extends GetxController {
       await onGetList(id: matchingIds?.firstOrNull.toString() ?? '0'); 
     }else{
       onGetList();
+    }
+  }
+
+  Future<bool> signOutFromGoogle() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return true;
+    } on Exception catch (_) {
+      return false;
     }
   }
 }

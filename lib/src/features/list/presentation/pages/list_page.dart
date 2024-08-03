@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:list_app/src/app/utils/data_wrapper.dart';
+import 'package:list_app/src/features/auth/presentation/pages/login_page.dart';
 import 'package:list_app/src/features/list/presentation/get/list_controller.dart';
 
 import '../../../widgets/item_widget.dart';
@@ -73,12 +74,19 @@ class ListPage extends GetView<ListController> {
         ),
       ),
       actions: [
-        IconButton(
-          icon: const Icon(Icons.person_2_sharp),
-          onPressed: () {
-            // Navigator.restorablePushNamed(context, SettingsView.routeName);
-          },
-        ),
+        GestureDetector(
+            onTap: () async {
+              final isSignedOut = await controller.signOutFromGoogle();
+              if (isSignedOut) {
+                Get.offAllNamed(LoginPage.routeName);
+              }
+            },
+            child: Container(
+                margin: const EdgeInsets.only(right: 16.0),
+                child: const Text(
+                  'Log Out',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ))),
       ],
     );
   }
