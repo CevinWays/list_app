@@ -3,7 +3,6 @@ import 'package:list_app/src/features/list/domain/entities/list_entity.dart';
 import 'package:list_app/src/features/list/domain/usecases/get_list.dart';
 
 import '../../../../app/utils/data_wrapper.dart';
-import '../../../../app/utils/usecase.dart';
 
 class ListController extends GetxController {
   final GetList _getList;
@@ -20,11 +19,24 @@ class ListController extends GetxController {
     super.onInit();
   }
 
-  void onGetList() async {
+  Future<void> onGetList({String? id}) async {
     _list.value = DataWrapper.loading();
 
-    await _getList.execute(NoParams()).then(
+    await _getList.execute(GetListParam(id: id)).then(
         (value) => _list.value = DataWrapper.success(value),
         onError: (e) => _list.value = DataWrapper.error());
+  }
+
+  void onMatchIds({required String inputText}) async{
+    if (inputText.isNotEmpty && _list.value.data != null) {
+      var matchingIds = _list.value.data
+          ?.where((item) =>
+              (item.title?.toLowerCase() ?? '').contains(inputText.toLowerCase()))
+          .map((item) => item.id as int)
+          .toList();
+      await onGetList(id: matchingIds?.firstOrNull.toString() ?? '0'); 
+    }else{
+      onGetList();
+    }
   }
 }

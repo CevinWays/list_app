@@ -8,10 +8,16 @@ class ListDatasourceImpl implements ListDatasource {
   ListDatasourceImpl({required this.client});
 
   @override
-  Future<List<ListModel>> getList() async {
-    final response = await client.get('/posts');
+  Future<List<ListModel>> getList({String? id}) async {
+    final endpoint = id == null ? '/posts' : '/posts/$id';
+    final response = await client.get(endpoint);
 
-    return List<ListModel>.from(
-        response.data.map((data) => ListModel.fromJson(data))).toList();
+    if(response.data is List){
+      return List<ListModel>.from(
+          response.data.map((data) => ListModel.fromJson(data))).toList();
+    }else{
+      final data = ListModel.fromJson(response.data);
+      return [data];
+    }
   }
 }

@@ -9,8 +9,8 @@ class ListRepositoryImpl implements ListRepository {
 
   ListRepositoryImpl({required this.listDatasource});
   @override
-  Future<List<ListEntity>> getList() async {
-    final model = await listDatasource.getList();
+  Future<List<ListEntity>> getList({String? id}) async {
+    final model = await listDatasource.getList(id: id);
 
     return List<ListEntity>.from(model.map((data) => ListMapper.toEntity(data)))
         .toList();

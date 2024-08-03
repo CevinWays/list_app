@@ -1,6 +1,8 @@
 
 
 import 'package:get/get.dart';
+import 'package:list_app/src/features/detail/presentation/get/detail_list_binding.dart';
+import 'package:list_app/src/features/detail/presentation/pages/detail_list_page.dart';
 import 'package:list_app/src/features/list/presentation/get/list_binding.dart';
 import 'package:list_app/src/features/list/presentation/pages/list_page.dart';
 
@@ -11,4 +13,8 @@ final pageRoutes = [
       name: ListPage.routeName,
       page: () => const ListPage(),
       binding: ListBinding()),
+  GetPage(
+      name: DetailListPage.routeName,
+      page: () => const DetailListPage(),
+      binding: DetailListBinding()),
 ];
